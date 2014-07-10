@@ -89,6 +89,7 @@ my $total = $#ARGV;
 if ( $total == -1 ) { help(); } 
 elsif ( $ARGV[0] =~ /^start$/  ) { start();  }
 elsif ( $ARGV[0] =~ /^stop$/  ) { stop(); }
+elsif ( $ARGV[0] =~ /^stop$/  ) { remoteCommand('pkill rtorrent') }
 elsif ( $ARGV[0] =~ /^restart$/  ) { stop(); start(); }
 elsif ( $ARGV[0] =~ /^--help$/ ) { help(); }
 elsif ( $ARGV[0] =~ /^-h$/ ) { help(); }

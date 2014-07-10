@@ -1,4 +1,7 @@
 Ok, so this program is totally for creating a way to easly control rtorrent on a remote server. basically it will start stop and provide some information about rtorrent. Nothing more. 
+<<<<<<< HEAD
 
 
 I wanted to test something real fast
+=======
+>>>>>>> c44d5887d25dd9c0207fa1b3881d344f9ea337e6
