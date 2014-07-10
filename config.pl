@@ -4,8 +4,8 @@ use strict;
 use warnings;
 
 ## this program is to install rtman and needs to be ran as root
-## creates /usr/local/bin/rtman
-## adds config file /etc/rtman.conf
+## you will want to move rtman.conf to /etc/
+## and cp rtman.pl to /usr/local/bin/rtman
 
 #write data to the config file
 sub wd  {
