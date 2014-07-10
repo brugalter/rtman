@@ -53,6 +53,7 @@ sub start  {
   if ($pid eq '') { 
     remoteCommand('screen -d -m rtorrent');
   } else { print STDERR "Rtorrent already running, PID: " . $pid;}
+  sleep 3;
   $pid = chkRunning();
   print "failed to start rtorrent" if ($pid eq '');
 }
@@ -75,6 +76,11 @@ sub status {
 #stop rtorrent
 sub stop  {
   remoteCommand('pkill rtorrent');
+  
+  #add a while loop here to see if the program dies
+  sleep 3;
+  my $pid = chkRunning();
+  print "rtorrent didn't die" unless $pid eq '';
 }
 
 ## read config and setup host
@@ -82,7 +88,7 @@ sub stop  {
 my $total = $#ARGV;
 if ( $total == -1 ) { help(); } 
 elsif ( $ARGV[0] =~ /^start$/  ) { start();  }
-elsif ( $ARGV[0] =~ /^stop$/  ) { remoteCommand('pkill rtorrent') }
+elsif ( $ARGV[0] =~ /^stop$/  ) { stop(); }
 elsif ( $ARGV[0] =~ /^restart$/  ) { stop(); start(); }
 elsif ( $ARGV[0] =~ /^--help$/ ) { help(); }
 elsif ( $ARGV[0] =~ /^-h$/ ) { help(); }
