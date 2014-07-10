@@ -9,23 +9,41 @@ use warnings;
 
 #write data to the config file
 sub wd  {
-  open (CONFIG, '>>rtman.conf');
-  print CONFIG "@_\n";
+  open (CONFIG, '>rtman.conf');
+  print CONFIG "@_";
   close (CONFIG);
 }
 
-sub create_config  {
- wd '#rtman.conf';
- wd '#written by brugalter';
- wd();
- wd '#move this file to /etc when you\'re done editing it';
- wd();
- wd '#host name or ip';
- wd 'host=';
- wd();
- wd '#user name on remote host';
- wd 'user=';
+sub getSettings {
+  print "this script will create the configuration file needed for rtman to function";
+  print "please enter the hostname you will be using for this script:";
+  my $host = <STDIN>;
+
+  print "please enter the username you will be using on the remote host:";
+  my $user = <STDIN>;
+  
+  my @returns;
+  $returns[0]=$host;
+  $returns[1]=$user;
+  return @returns;
 }
 
+sub createConf  {
+  my $host = @_[0];
+  my $user= @_[1];
+  print "$host";
+  print "$user";
+
+wd "#rtman.conf
+#written by brugalter
+#move rtman.conf file to /etc when you\'re done editing it\n
+#host name or ip
+host=$host\n
+#user name on remote host
+user=$user";
+}
+
+
 ## create the config file in the current dir
-create_config();
+my @settings = getSettings();
+createConf @settings;

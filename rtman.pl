@@ -36,6 +36,8 @@ sub readConf {
       }
     }
   }
+  die "something is wrong with /etc/rtman.conf: no hostname provided\n" unless $configs{'host'}ne'';
+  die "something is wrong with /etc/rtman.conf: no username provided\n" unless $configs{'user'}ne'';
   return %configs;
 }
 
@@ -51,6 +53,8 @@ sub start  {
   if ($pid eq '') { 
     remoteCommand('screen -d -m rtorrent');
   } else { print STDERR "Rtorrent already running, PID: " . $pid;}
+  $pid = chkRunning();
+  print "failed to start rtorrent" if ($pid eq '');
 }
 
 # show help menu
@@ -66,6 +70,11 @@ sub status {
   } else { 
     print "rtorrent is not running\n";
   }
+}
+
+#stop rtorrent
+sub stop  {
+  remoteCommand('pkill rtorrent');
 }
 
 ## read config and setup host
